@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://www.menu.com" xmlns="https://www.menu.com" elementFormDefault="qualified">
+
+    <xs:element name="breakfast_menu" type="breakfastmenutype"/>
+        <xs:complexType name="breakfastmenutype">
+            <xs:sequence>
+				<xs:element name="food" type="foodtype" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+
+		<xs:complexType name="foodtype">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="price" type="xs:string"/>
+			<xs:element name="description" type="xs:string"/>
+			<xs:element name="calories" type="xs:decimal"/>
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>
