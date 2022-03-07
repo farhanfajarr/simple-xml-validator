@@ -7,46 +7,40 @@ namespace Validator
     {
         String xmlFilePath;
         String xsdFilePath;
-        XmlReader? xmlReader;
-        XmlReaderSettings settings;
-        XmlSchemaSet schema;
 
         public XMLValidator(String xmlFilePath, String xsdFilePath) 
         {
             this.xmlFilePath = xmlFilePath;
             this.xsdFilePath = xsdFilePath;
-
-            this.xmlReader = null;
-            this.settings = new XmlReaderSettings();
-
-            this.schema = new XmlSchemaSet();
-            this.schema.Add("https://www.menu.com", this.xsdFilePath);
         }
 
         public void Validate()
         {
-            try {
-                this.settings.ValidationType = ValidationType.Schema;
-                this.settings.Schemas = this.schema;
-                // this.settings.ValidationFlags |= XmlSchemaValidationFlags.ProcessSchemaLocation;
-                // this.settings.ValidationFlags |= XmlSchemaValidationFlags.ReportValidationWarnings;
-                this.settings.ValidationEventHandler += new ValidationEventHandler((sender, args) =>
-                {
-                    throw new Exception ("\r\n\tValidation Error: " + args.Message);
-                });
-                xmlReader = XmlReader.Create(this.xmlFilePath, this.settings);
-                while (this.xmlReader.Read()) {}
-                Console.WriteLine("Validation Passed");
-            } catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            } finally 
-            {
-                if (this.xmlReader != null)
-                {
-                    this.xmlReader.Close();
-                }
-            }
+            // Set the validation settings
+            // - Schema type (XSD)
+            // - Add the schema
+            // - Add event handler (catch the error if validation is not match)
+            XmlReaderSettings settings = new XmlReaderSettings();
+            settings.ValidationType = ValidationType.Schema;
+            settings.Schemas.Add("https://www.menu.com", this.xsdFilePath);
+            settings.ValidationEventHandler += new ValidationEventHandler(ValidationCallback);     
+
+               
+            // Create the XmlReader object
+            XmlReader xmlReader = XmlReader.Create(this.xmlFilePath, settings);
+
+            // Parse the file
+            while (xmlReader.Read()) {}
+            
+            // Code reach here if there is no validation (validation passed)
+            Console.WriteLine("Validation Passed");
+             
+        }
+
+        private static void ValidationCallback(object? sender, ValidationEventArgs args) 
+        {
+            Console.WriteLine($"Validation Error: \n {args.Message}\n");
+            // Need to xmlReader.close() ?
         }
     }
 }
