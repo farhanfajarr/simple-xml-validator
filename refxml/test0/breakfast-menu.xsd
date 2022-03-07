@@ -4,17 +4,17 @@
     <xs:element name="breakfast_menu" type="breakfastmenutype"/>
         <xs:complexType name="breakfastmenutype">
             <xs:sequence>
-				<xs:element name="food" type="foodtype" minOccurs="0" maxOccurs="unbounded"/>
-			</xs:sequence>
-		</xs:complexType>
+		<xs:element name="food" type="foodtype" minOccurs="0" maxOccurs="unbounded"/>
+	    </xs:sequence>
+	</xs:complexType>
 
-		<xs:complexType name="foodtype">
-		<xs:sequence>
-			<xs:element name="name" type="xs:string"/>
-			<xs:element name="price" type="xs:string"/>
-			<xs:element name="description" type="xs:string"/>
-			<xs:element name="calories" type="xs:decimal"/>
-		</xs:sequence>
+	<xs:complexType name="foodtype">
+	    <xs:sequence>
+		<xs:element name="name" type="xs:string"/>
+		<xs:element name="price" type="xs:string"/>
+		<xs:element name="description" type="xs:string"/>
+		<xs:element name="calories" type="xs:decimal"/>
+	    </xs:sequence>
 	</xs:complexType>
 
 </xs:schema>
