@@ -7,8 +7,8 @@ namespace MainProgram
         static void Main (String[] args) 
         {
 
-            String xmlFilepath = "refxml/test1/breakfast-menu.xml";
-            String xsdFilePath = "refxml/test1/breakfast-menu.xsd";
+            String xmlFilepath = "refxml/test0/breakfast-menu.xml";
+            String xsdFilePath = "refxml/test0/breakfast-menu.xsd";
 
             XMLValidator xmlValidator = new XMLValidator(xmlFilepath, xsdFilePath);
             xmlValidator.Validate();
