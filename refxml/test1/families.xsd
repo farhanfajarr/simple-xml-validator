@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://www.refxml/families" xmlns="https://refxml/families" elementFormDefault="qualified">
+
+    <xs:element name="families" type="FamiliesType"/>
+
+    <xs:complexType name="FullNameType">
+        <xs:sequence>
+            <xs:element name="firstName" type="xs:string" minOccurs="0"/>
+            <xs:element name="lastName" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ChildType">
+        <xs:sequence>
+            <xs:element name="fullName" type="FullNameType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="gender" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>    
+
+    <xs:complexType>
+        <!-- parent -->
+    </xs:complexType>
+
+
+
+</xs:schema>
+
+
