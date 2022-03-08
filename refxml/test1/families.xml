@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<families xmlns="https://www.families.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://www.families.com families.xsd">
+
+<family>
+    <person>
+        <firstName>My</firstName>
+        <lastName>Grandpa</lastName>
+        <gender>m</gender>
+        <child>
+            <person>
+                <firstName>My</firstName>
+                <lastName>Dad</lastName>
+                <gender>m</gender>
+                <child>
+                    <person>
+                        <firstName>My</firstName>
+                        <lastName>Brother</lastName>
+                        <gender>m</gender>
+                        <child>
+                            <person>
+                                <firstName>My</firstName>
+                                <lastName>Nephew</lastName>
+                                <gender>m</gender>
+                            </person>
+                        </child>
+                        <child>
+                            <person>
+                                <firstName>My</firstName>
+                                <lastName>Niece</lastName>
+                                <gender>f</gender>
+                            </person>
+                        </child>
+                    </person>
+                </child>
+                <child>
+                    <person>
+                        <firstName>Myself</firstName>
+                        <lastName>Farhan</lastName>
+                        <gender>m</gender>
+                    </person>
+                </child>
+                <child>
+                    <person>
+                        <firstName>My</firstName>
+                        <lastName>Sister</lastName>
+                        <gender>f</gender>
+                    </person>
+                </child>
+            </person>
+            <person>
+                <firstName>My</firstName>
+                <lastName>Uncle</lastName>
+                <gender>m</gender>
+                <child>
+                    <person>
+                        <firstName>My</firstName>
+                        <lastName>Cousin</lastName>
+                        <gender>m</gender>
+                    </person>
+                </child>
+            </person>
+        </child>
+    </person>
+</family>
+
+</families>

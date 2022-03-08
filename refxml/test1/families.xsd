@@ -1,26 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://www.refxml/families" xmlns="https://refxml/families" elementFormDefault="qualified">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://www.families.com" xmlns="https://www.families.com" elementFormDefault="qualified">
 
-    <xs:element name="families" type="FamiliesType"/>
+    <xs:element name="families" type="familiesType"/>
 
-    <xs:complexType name="FullNameType">
+    <xs:complexType name="personType">
         <xs:sequence>
-            <xs:element name="firstName" type="xs:string" minOccurs="0"/>
-            <xs:element name="lastName" type="xs:string" minOccurs="0"/>
+            <xs:element name="firstName" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="lastName" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="gender" type="xs:string"/>
+            <xs:element name="child" type="childType" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
 
-    <xs:complexType name="ChildType">
+    <xs:complexType name="childType">
         <xs:sequence>
-            <xs:element name="fullName" type="FullNameType" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="gender" type="xs:string"/>
+            <xs:element name="person" type="personType" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>    
 
-    <xs:complexType>
-        <!-- parent -->
-    </xs:complexType>
+    <xs:complexType name="familiesType">
+        <xs:sequence>
+            <xs:element name="family" type="familyType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>    
 
+    <xs:complexType name="familyType">
+        <xs:sequence>
+            <xs:element name="person" type="personType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType> 
 
 
 </xs:schema>
