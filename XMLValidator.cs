@@ -41,6 +41,8 @@ namespace Validator
         {
             Console.WriteLine($"Validation Error: \n {args.Message}\n");
             // Need to xmlReader.close() ?
+
+            // Exit code if error on validation
             Environment.Exit(1);
         }
     }
