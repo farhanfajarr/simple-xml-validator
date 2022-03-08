@@ -5,27 +5,46 @@ namespace Validator
 {
     public class XMLValidator 
     {
-        String xmlFilePath;
-        String xsdFilePath;
+        String xmlFilePath = "";
+        String xsdFilePath = "";
+        String targetNamespace = "";
 
-        public XMLValidator(String xmlFilePath, String xsdFilePath) 
+        String xmlFilePath1 = "refxml/test1/breakfast-menu.xml";
+        String xsdFilePath1 = "refxml/test1/breakfast-menu.xsd";
+        String targetNamespace1 = "https://www.menu.com";
+
+        String xmlFilePath2 = "refxml/test2/families.xml";
+        String xsdFilePath2 = "refxml/test2/families.xsd";
+        String targetNamespace2 = "https://www.families.com";
+
+        public XMLValidator(String test) 
         {
-            this.xmlFilePath = xmlFilePath;
-            this.xsdFilePath = xsdFilePath;
+            switch (test) 
+            {
+                case "test1" : 
+                    this.xmlFilePath = this.xmlFilePath1;
+                    this.xsdFilePath = this.xsdFilePath1;
+                    this.targetNamespace = this.targetNamespace1;
+                    break;
+                case "test2" : 
+                    this.xmlFilePath = this.xmlFilePath2;
+                    this.xsdFilePath = this.xsdFilePath2;
+                    this.targetNamespace = this.targetNamespace2;
+                    break;
+            }
         }
 
-        public void Validate()
+        public void ValidateTest()
         {
-            // Set the validation settings
+            // Set the XMLReaderSettings
             // - Schema type (XSD)
             // - Add the schema
             // - Add event handler (catch the error if validation is not match)
             XmlReaderSettings settings = new XmlReaderSettings();
             settings.ValidationType = ValidationType.Schema;
-            settings.Schemas.Add("https://www.menu.com", this.xsdFilePath);
-            settings.ValidationEventHandler += new ValidationEventHandler(ValidationCallback);     
+            settings.Schemas.Add(this.targetNamespace, this.xsdFilePath);
+            settings.ValidationEventHandler += new ValidationEventHandler(ValidationCallback);   
 
-               
             // Create the XmlReader object
             XmlReader xmlReader = XmlReader.Create(this.xmlFilePath, settings);
 
