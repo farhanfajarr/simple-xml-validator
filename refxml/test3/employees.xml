@@ -4,6 +4,7 @@
     <employee:info>
         <name:firstName>Farhan Fajar</name:firstName>
         <name:lastName>Ramadhan</name:lastName>
+        <employee:gender>m</employee:gender>
         <contact:phoneNumber>+4917612345678</contact:phoneNumber>
         <contact:emailAddress>email@domain.com</contact:emailAddress>
         <contact:companyInfo>
