@@ -36,6 +36,11 @@ namespace Validator
                     this.xsdFilePath = this.xsdFilePath2;
                     this.targetNamespace = this.targetNamespace2;
                     break;
+                case "test3" :
+                    this.xmlFilePath = this.xmlFilePath3;
+                    this.xsdFilePath = this.xsdFilePath3;
+                    this.targetNamespace = this.targetNamespace3;
+                    break; 
             }
         }
 
