@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://www.refxml.com/test3/person" xmlns="https://www.refxml.com/test3/person" elementFormDefault="qualified">
+
+    <xs:complexType name="Bio">
+        <xs:complexContent>
+            <xs:extension base="Name">
+                <xs:sequence>
+                    <xs:element name="gender" type="Gender"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="Name">
+        <xs:sequence>
+            <xs:element name="firstName" type="xs:string"/>
+            <xs:element minOccurs="0" name="middleName" type="xs:string"/>
+            <xs:element name="lastName" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+   <xs:simpleType name="Gender">
+       <xs:restriction base="xs:string">
+           <xs:enumeration value="m"/>
+           <xs:enumeration value="f"/>
+       </xs:restriction>
+   </xs:simpleType>
+
+</xs:schema>

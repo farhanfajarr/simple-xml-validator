@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="https://www.refxml.com/test3/contact" xmlns:name="https://www.refxml.com/test3/name" targetNamespace="https://www.refxml.com/test3/contact" elementFormDefault="qualified">
+    <xs:import namespace="https://www.refxml.com/test3/name" schemaLocation="name.xsd"/>
+
+    <xs:complexType name="ContactPerson">
+        <xs:complexContent>
+            <xs:extension base="name:Bio">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="phoneNumber" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="emailAddress" type="xs:string"/>
+                    <xs:element name="companyInfo" type="CompanyInfo"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="CompanyInfo">
+        <xs:complexContent>
+            <xs:extension base="company:Company">
+                <xs:sequence>
+                    <xs:element name="designation" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+</xs:schema>

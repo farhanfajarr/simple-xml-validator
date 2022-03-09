@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="https://www.refxml.com/test3/company" xmlns:location="https://www.refxml.com/test3/location" elementFormDefault="qualified" targetNamespace="https://www.refxml.com/test3/company">
+    <xs:import namespace="https://www.refxml.com/test3/location" schemaLocation="location.xsd"/>
+
+    <xs:complexType name="Company">
+        <xs:element name="companyName" type="xs:string"/>
+        <xs:element name="location" type="CompanyLocation"/>
+    </xs:complexType>
+
+    <xs:complexType name="CompanyLocation">
+        <xs:complexContent>
+            <xs:extension base="location:Location"/>
+        </xs:complexContent>
+    </xs:complexType>
+
+</xs:schema>
