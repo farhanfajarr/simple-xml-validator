@@ -9,13 +9,18 @@ namespace Validator
         String xsdFilePath = "";
         String targetNamespace = "";
 
+        // TEST1 (Breakfast Menu)
         String xmlFilePath1 = "refxml/test1/breakfast-menu.xml";
         String xsdFilePath1 = "refxml/test1/breakfast-menu.xsd";
         String targetNamespace1 = "https://www.menu.com";
-
+        // TEST2 (One side family tree)
         String xmlFilePath2 = "refxml/test2/families.xml";
         String xsdFilePath2 = "refxml/test2/families.xsd";
         String targetNamespace2 = "https://www.families.com";
+        // TEST3 (Employees with many schema)
+        String xmlFilePath3 = "refxml/test3/employees.xml";
+        String xsdFilePath3 = "refxml/test3/employees.xsd";
+        String targetNamespace3 = "https://refxml.com/test3/employees";
 
         public XMLValidator(String test) 
         {
