@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="https://www.refxml.com/test3/employee" xmlns:contact="https://www.refxml.com/test3/contact"  elementFormDefault="qualified" targetNamespace="https://www.refxml.com/test3/company"> 
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="https://www.refxml.com/test3/employee" xmlns:contact="https://www.refxml.com/test3/contact"  elementFormDefault="qualified" targetNamespace="https://www.refxml.com/test3/employee"> 
     <xs:import namespace="https://www.refxml.com/test3/contact" schemaLocation="contact.xsd"/>
 
+    <xs:complexType name="Employee">
+        <xs:sequence>  
+            <xs:element name="info" type="Info"/>
+        </xs:sequence>
+    </xs:complexType>
+
     <xs:complexType name="Info">
-        <xs:complexContext>
+        <xs:complexContent>
             <xs:extension base="contact:ContactPerson"></xs:extension>
-        </xs:complexType>
+        </xs:complexContent>
     </xs:complexType> 
 
 </xs:schema>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<employees xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://www.refxml.com/test3/employees" xsi:schemaLocation="https://www.refxml.com/test3/employees employees.xsd">
+<employees xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:employee="https://www.refxml.com/test3/employee" xmlns:person="https://www.refxml.com/test3/person" xmlns:contact="https://www.refxml.com/test3/contact" xmlns:company="https://www.refxml.com/test3/company" xmlns:location="https://www.refxml.com/test3/location" xmlns="https://www.refxml.com/test3/employees" xsi:schemaLocation="https://www.refxml.com/test3/employees employees.xsd">
 
     <employee:info>
         <person:firstName>Farhan Fajar</person:firstName>
@@ -8,13 +8,13 @@
         <contact:phoneNumber>+4917612345678</contact:phoneNumber>
         <contact:emailAddress>email@domain.com</contact:emailAddress>
         <contact:companyInfo>
-            <contact:designation>Software Developer</contact:designation>
             <company:companyName>DB Netz AG</company:companyName> 
             <company:location>
-                <compLoc:street>Adam-Riese-Strasse 11-13</company:street>
-                <compLoc:city>Frankfurt am Main</company:city>
-                <compLoc:phoneNumber>0180 6 996633</company:phoneNumber>
+                <location:street>Adam-Riese-Strasse 11-13</location:street>
+                <location:city>Frankfurt am Main</location:city>
+                <location:phoneNumber>0180 6 996633</location:phoneNumber>
             </company:location>
+            <contact:designation>Software Developer</contact:designation>
         </contact:companyInfo>
     </employee:info>
 

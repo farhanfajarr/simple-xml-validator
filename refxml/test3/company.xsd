@@ -3,8 +3,10 @@
     <xs:import namespace="https://www.refxml.com/test3/location" schemaLocation="location.xsd"/>
 
     <xs:complexType name="Company">
-        <xs:element name="companyName" type="xs:string"/>
-        <xs:element name="location" type="CompanyLocation"/>
+        <xs:sequence>
+            <xs:element name="companyName" type="xs:string"/>
+            <xs:element name="location" type="CompanyLocation"/>
+        </xs:sequence>
     </xs:complexType>
 
     <xs:complexType name="CompanyLocation">

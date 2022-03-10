@@ -2,9 +2,11 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="https://www.refxml.com/test3/location" targetNamespace="https://www.refxml.com/test3/location" elementFormDefault="qualified">
 
     <xs:complexType name="Location">
-        <xs:element name="street" type="xs:string"/>
-        <xs:element name="city" type="xs:string"/>
-        <xs:element minOccurs="0" maxOccurs="unbounded" name="phoneNumber" type="xs:string"/>
+            <xs:sequence>
+            <xs:element name="street" type="xs:string"/>
+            <xs:element name="city" type="xs:string"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="phoneNumber" type="xs:string"/>
+        </xs:sequence>
     </xs:complexType>
 
 </xs:schema>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="https://www.refxml.com/test3/employees" xmlns:employee="https://www.refxml.com/test3/employee" elementFormDefault="qualified" targetNamespace="https://www.refxml.com/test3/company">
-    <xs:import namespace="https://www.refxml.com/employee" schemaLocation="employee.xsd"/>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="https://www.refxml.com/test3/employees" xmlns:employee="https://www.refxml.com/test3/employee" elementFormDefault="qualified" targetNamespace="https://www.refxml.com/test3/employees">
+    <xs:import namespace="https://www.refxml.com/test3/employee" schemaLocation="employee.xsd"/>
 
     <xs:complexType name="Employees">
-        <xs:complexContect>
-            <xs:extension base="employee:Info"/>
-        </xs:complexContect>
+        <xs:complexContent>
+            <xs:extension base="employee:Employee"/>
+        </xs:complexContent>
     </xs:complexType>
 
     <xs:element name="employees" type="Employees"/>
