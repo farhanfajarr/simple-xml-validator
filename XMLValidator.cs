@@ -5,22 +5,32 @@ namespace Validator
 {
     public class XMLValidator 
     {
-        String xmlFilePath = "";
-        String xsdFilePath = "";
-        String targetNamespace = "";
+        string xmlFilePath = "";
+        string[] xsdFilePath = {};
+        string[] targetNamespace = {};
 
         // TEST1 (Breakfast Menu)
-        String xmlFilePath1 = "refxml/test1/breakfast-menu.xml";
-        String xsdFilePath1 = "refxml/test1/breakfast-menu.xsd";
-        String targetNamespace1 = "https://www.menu.com";
+        string xmlFilePath1 = "refxml/test1/breakfast-menu.xml";
+        string[] xsdFilePath1 = {"refxml/test1/breakfast-menu.xsd"};
+        string[] targetNamespace1 = {"https://www.menu.com"};
         // TEST2 (One side family tree)
-        String xmlFilePath2 = "refxml/test2/families.xml";
-        String xsdFilePath2 = "refxml/test2/families.xsd";
-        String targetNamespace2 = "https://www.families.com";
+        string xmlFilePath2 = "refxml/test2/families.xml";
+        string[] xsdFilePath2 = {"refxml/test2/families.xsd"};
+        string[] targetNamespace2 = {"https://www.families.com"};
         // TEST3 (Employees with many schema)
-        String xmlFilePath3 = "refxml/test3/employees.xml";
-        String xsdFilePath3 = "refxml/test3/employees.xsd";
-        String targetNamespace3 = "https://refxml.com/test3/employees";
+        string xmlFilePath3 = "refxml/test3/employees.xml";
+        string[] xsdFilePath3 = {"refxml/test3/employees.xsd",
+                                 "refxml/test3/employee.xsd",
+                                 "refxml/test3/contact.xsd",
+                                 "refxml/test3/person.xsd",
+                                 "refxml/test3/company.xsd",
+                                 "refxml/test3/location.xsd"};
+        string[] targetNamespace3 = {"https://www.refxml.com/test3/employees",
+                                     "https://www.refxml.com/test3/employee",
+                                     "https://www.refxml.com/test3/contact",
+                                     "https://www.refxml.com/test3/person",
+                                     "https://www.refxml.com/test3/company",
+                                     "https://www.refxml.com/test3/location"};
 
         public XMLValidator(String test) 
         {
@@ -44,15 +54,30 @@ namespace Validator
             }
         }
 
+
+        public XmlSchemaSet GenerateSchemaSet(string[] tNs, string[] schemaPaths)
+        {
+            // Create the XmlSchemaSet class
+            XmlSchemaSet schemaSet = new XmlSchemaSet();
+
+            // Add the schemas to the collection
+            for (int i = 0; i < tNs.Length; i++)
+            {
+               schemaSet.Add(tNs[i], schemaPaths[i]); 
+            }
+
+            return schemaSet;
+        }
+
         public void ValidateTest()
         {
             // Set the XMLReaderSettings
             // - Schema type (XSD)
-            // - Add the schema
+            // - Generate XmlSchemaSet and add them to settings
             // - Add event handler (catch the error if validation is not match)
             XmlReaderSettings settings = new XmlReaderSettings();
             settings.ValidationType = ValidationType.Schema;
-            settings.Schemas.Add(this.targetNamespace, this.xsdFilePath);
+            settings.Schemas.Add(GenerateSchemaSet(this.targetNamespace, this.xsdFilePath));
             settings.ValidationEventHandler += new ValidationEventHandler(ValidationCallback);   
 
             // Create the XmlReader object
