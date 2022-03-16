@@ -2,7 +2,6 @@ using System.Xml;
 using System.Xml.Schema;
 
 namespace Validator
-
 {
     public class XMLValidator 
     {
