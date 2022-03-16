@@ -31,6 +31,32 @@ namespace Validator
                                      "https://www.refxml.com/test3/person",
                                      "https://www.refxml.com/test3/company",
                                      "https://www.refxml.com/test3/location"};
+        // EULYNX TEST (eulynxTrialMeggen)
+        string xmlFilePath4 = "refxml/EULYNX_DP_V1.0/eulynxScheibenberg.euxml";
+        string[] xsdFilePath4 = {"refxml/EULYNX_DP_V1.0/DB.xsd",
+                                 "refxml/EULYNX_DP_V1.0/Generic.xsd",
+                                 "refxml/EULYNX_DP_V1.0/NR.xsd",
+                                 "refxml/EULYNX_DP_V1.0/ProRail.xsd",
+                                 "refxml/EULYNX_DP_V1.0/RFI.xsd",
+                                 "refxml/EULYNX_DP_V1.0/RsmCommon.xsd",
+                                 "refxml/EULYNX_DP_V1.0/RsmNetEntity.xsd",
+                                 "refxml/EULYNX_DP_V1.0/RsmSignalling.xsd",
+                                 "refxml/EULYNX_DP_V1.0/RsmTrack.xsd",
+                                 "refxml/EULYNX_DP_V1.0/Signalling.xsd",
+                                 "refxml/EULYNX_DP_V1.0/SNCF.xsd",
+                                 "refxml/EULYNX_DP_V1.0/TRV.xsd"};
+        string[] targetNamespace4 = {"http://dataprep.eulynx.eu/schema/DB/1.0",
+                                     "http://dataprep.eulynx.eu/schema/Generic/1.0", 
+                                     "http://dataprep.eulynx.eu/schema/NR/1.0",
+                                     "http://dataprep.eulynx.eu/schema/ProRail/1.0",
+                                     "http://dataprep.eulynx.eu/schema/RFI/1.0",
+                                     "http://www.railsystemmodel.org/schemas/Common/1.2",
+                                     "http://www.railsystemmodel.org/schemas/NetEntity/1.2",
+                                     "http://www.railsystemmodel.org/schemas/Signalling/1.2",
+                                     "http://www.railsystemmodel.org/schemas/Track/1.2",
+                                     "http://dataprep.eulynx.eu/schema/Signalling/1.0",
+                                     "http://dataprep.eulynx.eu/schema/SNCF/1.0",
+                                     "http://dataprep.eulynx.eu/schema/TRV/1.0"};
 
         public XMLValidator(String test) 
         {
@@ -50,7 +76,12 @@ namespace Validator
                     this.xmlFilePath = this.xmlFilePath3;
                     this.xsdFilePath = this.xsdFilePath3;
                     this.targetNamespace = this.targetNamespace3;
-                    break; 
+                    break;
+                case "eulynx" :
+                    this.xmlFilePath = this.xmlFilePath4;
+                    this.xsdFilePath = this.xsdFilePath4;
+                    this.targetNamespace = this.targetNamespace4;
+                    break;
             }
         }
 
@@ -77,27 +108,35 @@ namespace Validator
             // - Add event handler (catch the error if validation is not match)
             XmlReaderSettings settings = new XmlReaderSettings();
             settings.ValidationType = ValidationType.Schema;
-            settings.Schemas.Add(GenerateSchemaSet(this.targetNamespace, this.xsdFilePath));
-            settings.ValidationEventHandler += new ValidationEventHandler(ValidationCallback);   
+            // settings.ValidationFlags |= XmlSchemaValidationFlags.ProcessSchemaLocation;
+            // settings.ValidationFlags |= XmlSchemaValidationFlags.ReportValidationWarnings;
+            // settings.Schemas.Add(GenerateSchemaSet(this.targetNamespace, this.xsdFilePath));
+            // settings.ValidationEventHandler += new ValidationEventHandler(ValidationCallback);   
 
             // Create the XmlReader object
-            XmlReader xmlReader = XmlReader.Create(this.xmlFilePath, settings);
+            XmlReader xmlReader = XmlReader.Create(new StringReader(File.ReadAllText(this.xmlFilePath)), settings);
 
             // Parse the file
             while (xmlReader.Read()) {}
             
-            // Code reach here if there is no validation (validation passed)
-            Console.WriteLine("Validation Passed");
+            // Shows that validation is completed
+            Console.WriteLine("Validation completed");
+
+            // Close xmlReader object
+            xmlReader.Close();
              
         }
 
         private static void ValidationCallback(object? sender, ValidationEventArgs args) 
         {
-            Console.WriteLine($"Validation Error: \n {args.Message}\n");
-            // Need to xmlReader.close() ?
+            Console.WriteLine(String.Format(
+                    Environment.NewLine + "Line: {0}, Position {1}: \"{2}\"",
+                    args.Exception.LineNumber,
+                    args.Exception.LinePosition,
+                    args.Exception.Message));
 
             // Exit code if error on validation
-            Environment.Exit(1);
+            // Environment.Exit(1);
         }
     }
 }
