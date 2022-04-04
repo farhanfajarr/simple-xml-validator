@@ -7,7 +7,7 @@ namespace MainProgram
         static void Main (String[] args) 
         {
 
-            XMLValidator xmlValidator = new XMLValidator("test3");
+            XMLValidator xmlValidator = new XMLValidator("oldeulynx");
             xmlValidator.ValidateTest();
             
         }

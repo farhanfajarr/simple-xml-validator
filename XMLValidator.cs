@@ -58,6 +58,25 @@ namespace Validator
                                      "http://dataprep.eulynx.eu/schema/SNCF/1.0",
                                      "http://dataprep.eulynx.eu/schema/TRV/1.0"};
 
+        // OLD EULYNX TEST (eulynxTrialMeggen)
+        string xmlFilePath5 = "refxml/XSD_OLD/eulynxScheibenberg.euxml";
+        string[] xsdFilePath5 = {"refxml/XSD_OLD/Eulynx_Schema/Signalling.xsd",
+                                 "refxml/XSD_OLD/Eulynx_Schema/Generic.xsd",
+                                 "refxml/XSD_OLD/Eulynx_Schema/DB.xsd",
+                                 "refxml/XSD_OLD/RSM_Schema/Common.xsd",
+                                 "refxml/XSD_OLD/RSM_Schema/NetEntity.xsd",
+                                 "refxml/XSD_OLD/RSM_Schema/Signalling.xsd",
+                                 "refxml/XSD_OLD/RSM_Schema/Track.xsd"};
+        string[] targetNamespace5 = {"http://dataprep.eulynx.eu/schema/Signalling",
+                                     "http://dataprep.eulynx.eu/schema/Generic", 
+                                     "http://dataprep.eulynx.eu/schema/DB", 
+                                     "http://www.railsystemmodel.org/schemas/RSM1.2beta/Common",
+                                     "http://www.railsystemmodel.org/schemas/RSM1.2beta/NetEntity",
+                                     "http://www.railsystemmodel.org/schemas/RSM1.2beta/Signalling",
+                                     "http://www.railsystemmodel.org/schemas/RSM1.2beta/Track"};
+
+        static List<string> logs = new List<string>();
+
         public XMLValidator(String test) 
         {
             switch (test) 
@@ -81,6 +100,11 @@ namespace Validator
                     this.xmlFilePath = this.xmlFilePath4;
                     this.xsdFilePath = this.xsdFilePath4;
                     this.targetNamespace = this.targetNamespace4;
+                    break;
+                case "oldeulynx" :
+                    this.xmlFilePath = this.xmlFilePath5;
+                    this.xsdFilePath = this.xsdFilePath5;
+                    this.targetNamespace = this.targetNamespace5;
                     break;
             }
         }
@@ -108,10 +132,10 @@ namespace Validator
             // - Add event handler (catch the error if validation is not match)
             XmlReaderSettings settings = new XmlReaderSettings();
             settings.ValidationType = ValidationType.Schema;
-            // settings.ValidationFlags |= XmlSchemaValidationFlags.ProcessSchemaLocation;
-            // settings.ValidationFlags |= XmlSchemaValidationFlags.ReportValidationWarnings;
-            // settings.Schemas.Add(GenerateSchemaSet(this.targetNamespace, this.xsdFilePath));
-            // settings.ValidationEventHandler += new ValidationEventHandler(ValidationCallback);   
+            settings.ValidationFlags |= XmlSchemaValidationFlags.ProcessSchemaLocation;
+            settings.ValidationFlags |= XmlSchemaValidationFlags.ReportValidationWarnings;
+            settings.Schemas.Add(GenerateSchemaSet(this.targetNamespace, this.xsdFilePath));
+            settings.ValidationEventHandler += new ValidationEventHandler(ValidationCallback);   
 
             // Create the XmlReader object
             XmlReader xmlReader = XmlReader.Create(new StringReader(File.ReadAllText(this.xmlFilePath)), settings);
@@ -124,16 +148,34 @@ namespace Validator
 
             // Close xmlReader object
             xmlReader.Close();
+
+            // LOGS
+
+            // Set a variable to the Documents path.
+            string docPath = Environment.CurrentDirectory;
+
+            // Write the string array to a new file named "logs.txt".
+            using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "logs.txt")))
+            {
+            foreach (string line in logs)
+                outputFile.WriteLine(line);
+            }
              
         }
 
         private static void ValidationCallback(object? sender, ValidationEventArgs args) 
         {
-            Console.WriteLine(String.Format(
-                    Environment.NewLine + "Line: {0}, Position {1}: \"{2}\"",
+            string msg = String.Format(
+                    Environment.NewLine + 
+                    args.Severity +
+                    ": Line: {0}, Position {1}: \"{2}\"",
                     args.Exception.LineNumber,
                     args.Exception.LinePosition,
-                    args.Exception.Message));
+                    args.Exception.Message);
+
+            Console.WriteLine(msg);
+                    
+            logs.Add(msg);
 
             // Exit code if error on validation
             // Environment.Exit(1);
